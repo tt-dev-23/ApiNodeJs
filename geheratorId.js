@@ -1,3 +1,5 @@
 const { nanoid } = require("nanoid");
-const ID = nanoid(6);
-console.log(ID);
+
+function getIf() {
+  return nanoid(6);
+}
