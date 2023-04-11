@@ -1,0 +1,8 @@
+{
+  "name": "supabase",
+  "packageManager": "yarn@3.5.0",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.16.0",
+    "dotenv": "^16.0.3"
+  }
+}
