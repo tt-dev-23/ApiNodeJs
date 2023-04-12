@@ -6,6 +6,8 @@ const supabaseKey = process.env.SUPABASE_KEY;
 
 const supabaseApp = supabase.createClient(supabaseUrl, supabaseKey);
 
+const { getId } = require("./geheratorId");
+
 // async function addUser(name) {
 //   try {
 //     const { error } = await supabaseApp
@@ -89,3 +91,5 @@ let data = {
 // addJsonData(id, data);
 
 getJsonData(id).then((res) => console.log(res));
+let idUrl = getId();
+console.log(idUrl);
