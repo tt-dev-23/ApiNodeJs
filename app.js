@@ -8,49 +8,12 @@ const supabaseApp = supabase.createClient(supabaseUrl, supabaseKey);
 
 const { getId } = require("./geheratorId");
 
-// async function addUser(name) {
-//   try {
-//     const { error } = await supabaseApp
-//       .from("user")
-//       .insert({ name: `${name}` });
-
-//     if (error) throw error;
-//   } catch (e) {
-//     console.log(e);
-//   }
-// }
-
-// async function getCountUser() {
-//   try {
-//     const { error, count } = await supabaseApp
-//       .from("user")
-//       .select("id", { count: "exact", head: true });
-//     if (error) throw error;
-//     return { count };
-//   } catch (e) {
-//     console.log(e);
-//   }
-// }
-
-// async function getTask() {
-//   try {
-//     const { data, error } = await supabaseApp.from("user").select();
-//     if (error) throw error;
-//     return data;
-//   } catch (e) {
-//     console.log(e);
-//   }
-// }
-
-// addUser("Petr");
-
-// getTask().then((res) => console.log(res));
-// getCount().then((res) => console.log(res));
-
-async function addJsonData(id, data) {
+async function addJsonData(data) {
   try {
     try {
+      console.log("data", data);
       if (typeof data === "object") {
+        let id = getId();
         const { error } = await supabaseApp
           .from("jsons_tb")
           .insert([{ id: id, data: data }]);
@@ -82,14 +45,17 @@ async function getJsonData(id) {
   }
 }
 
-let id = "asdcde1-";
-let data = {
-  name: "Denis",
-  age: 32,
-};
+// let id = "asdcde1-";
+// let data = {
+//   name: "Denis",
+//   age: 32,
+// };
+
+module.exports.addJsonData = addJsonData;
+module.exports.getJsonData = getJsonData;
 
 // addJsonData(id, data);
 
-getJsonData(id).then((res) => console.log(res));
-let idUrl = getId();
-console.log(idUrl);
+// getJsonData(id).then((res) => console.log(res));
+// let idUrl = getId();
+// console.log(idUrl);

@@ -1,4 +1,6 @@
 const express = require("express");
+const { getJsonData } = require("./app.js");
+const { addJsonData } = require("./app.js");
 
 const app = express();
 
@@ -12,7 +14,10 @@ app.get("/get/:id", function (request, response) {
   if (id.length > 6) {
     response.send(`<h1>Ошибка</h1>`);
   } else {
-    response.send(`<h1>${id}</h1>`);
+    getJsonData(id).then(function (data) {
+      console.log(JSON.stringify(data));
+      response.send(`<h1>${JSON.stringify(data)}</h1>`);
+    });
   }
 });
 
@@ -24,7 +29,8 @@ app.post("/", urlencodedParser, function (request, response) {
     return response.sendStatus(400);
   }
   console.log(request.body);
-  response.send(`${request.body.idJson}`);
+  addJsonData(request.body);
+  response.send(`${request.body}`);
 });
 
 app.listen(3000, () => console.log("Server run..."));
