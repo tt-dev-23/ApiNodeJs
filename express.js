@@ -20,7 +20,9 @@ app.get("/get/:id", function (request, response) {
 const urlencodedParser = express.urlencoded({ extended: true, limit: "1mb" });
 
 app.post("/", urlencodedParser, function (request, response) {
-  if (!request.body) return response.sendStatus(400);
+  if (!request.body) {
+    return response.sendStatus(400);
+  }
   console.log(request.body);
   response.send(`${request.body.idJson}`);
 });
