@@ -1,5 +1,9 @@
-const { nanoid } = require("nanoid");
+const { customAlphabet } = require("nanoid");
+const { alphanumeric } = require("nanoid-dictionary");
 
 function getId() {
-  return nanoid(6);
+  const nanoid = customAlphabet(alphanumeric, 6);
+  return nanoid();
 }
+
+console.log(getId());
