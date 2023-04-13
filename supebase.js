@@ -45,8 +45,9 @@ async function getJsonData(id) {
       throw error;
     }
     return data;
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    console.log(error);
+    return { error: "not object" };
   }
 }
 module.exports.addJsonData = addJsonData;
