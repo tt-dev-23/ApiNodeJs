@@ -9,7 +9,7 @@ app.get("/", function (request, response) {
 });
 
 app.get("/get/:id", function (request, response) {
-  let id = request.params.id;
+  const id = request.params.id;
 
   if (id.length > 6) {
     response.json({ error: "error" });

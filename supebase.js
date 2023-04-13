@@ -12,7 +12,7 @@ async function addJsonData(data) {
   try {
     try {
       if (typeof data === "object") {
-        let id = getId();
+        const id = getId();
         const { error } = await supabaseApp
           .from("jsons_tb")
           .insert([{ id: id, data: data }]);
