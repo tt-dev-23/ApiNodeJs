@@ -15,8 +15,7 @@ app.get("/get/:id", function (request, response) {
     response.send(`<h1>Ошибка</h1>`);
   } else {
     getJsonData(id).then(function (data) {
-      console.log(JSON.stringify(data));
-      response.send(`<h1>${JSON.stringify(data)}</h1>`);
+      response.json(data[0]["data"]);
     });
   }
 });
