@@ -1,12 +1,11 @@
 require("dotenv").config();
 const supabase = require("@supabase/supabase-js");
+const { getId } = require("./generatorId");
 
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_KEY;
 
 const supabaseApp = supabase.createClient(supabaseUrl, supabaseKey);
-
-const { getId } = require("./generatorId");
 
 async function addJsonData(data) {
   try {
