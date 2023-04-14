@@ -43,7 +43,11 @@ async function getJsonData(id) {
     if (error) {
       throw error;
     }
-    return data;
+    if (data.length) {
+      return data[0]["data"];
+    } else {
+      throw error;
+    }
   } catch (error) {
     console.log(error);
     return { error: "not object" };

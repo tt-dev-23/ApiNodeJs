@@ -14,11 +14,7 @@ app.get("/get/:id", function (request, response) {
     response.json({ error: "error" });
   } else {
     getJsonData(id).then(function (data) {
-      if (data.length) {
-        response.json(data[0]["data"]);
-      } else {
-        response.json({ error: "no object with this id" });
-      }
+      response.json(data);
     });
   }
 });
