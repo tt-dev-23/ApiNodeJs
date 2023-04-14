@@ -1,5 +1,5 @@
 const express = require("express");
-const { getJsonData, addJsonData } = require("./supebase.js");
+const { getJsonData, addJsonData } = require("./supabase.js");
 
 const app = express();
 
