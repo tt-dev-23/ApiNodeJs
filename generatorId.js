@@ -1,9 +1,11 @@
 const { customAlphabet } = require("nanoid");
-const { alphanumeric } = require("nanoid-dictionary");
 
 module.exports = {
   getId: () => {
-    const nanoid = customAlphabet(alphanumeric, 6);
+    const nanoid = customAlphabet(
+      "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      6
+    );
     return nanoid();
   },
 };
