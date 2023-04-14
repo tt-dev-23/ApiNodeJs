@@ -26,8 +26,13 @@ app.post("/", urlencodedParser, function (request, response) {
   if (!request.body) {
     return response.sendStatus(400);
   }
-  addJsonData(request.body);
-  response.send(`${request.body}`);
+  try {
+    addJsonData(request.body).then(function (data) {
+      response.json(data);
+    });
+  } catch (error) {
+    response.json(error);
+  }
 });
 
 app.listen(3000, () => console.log("Server run..."));

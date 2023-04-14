@@ -12,18 +12,19 @@ async function addJsonData(data) {
     try {
       if (typeof data === "object") {
         const id = getId();
-        const { error } = await supabaseApp
+        const { status, statusText, error } = await supabaseApp
           .from("jsons_tb")
-          .insert([{ id: id, data: data }]);
+          .insert([{ id, data }]);
 
         if (error) {
           throw error;
         }
+        return { statusText, status };
       } else {
         throw new NotJsonException();
       }
     } catch (e) {
-      console.log(e);
+      return { statusText };
     }
   } catch (NotJsonException) {
     console.log(NotJsonException.message);
@@ -39,17 +40,15 @@ async function getJsonData(id) {
     const { data, error } = await supabaseApp
       .from("jsons_tb")
       .select("data")
-      .eq("id", id);
+      .eq("id", id)
+      .limit(1)
+      .single();
     if (error) {
       throw error;
     }
-    if (data.length) {
-      return data[0]["data"];
-    } else {
-      throw error;
-    }
+    return data.data;
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
     return { error: "not object" };
   }
 }
