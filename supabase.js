@@ -9,30 +9,26 @@ const supabaseApp = supabase.createClient(supabaseUrl, supabaseKey);
 
 async function addJsonData(data) {
   try {
-    try {
-      if (typeof data === "object") {
-        const id = getId();
-        const { status, statusText, error } = await supabaseApp
-          .from("jsons_tb")
-          .insert([{ id, data }]);
+    if (typeof data === "object") {
+      const id = getId();
+      const { status, error } = await supabaseApp
+        .from("jsons_tb")
+        .insert([{ id, data }]);
 
-        if (error) {
-          throw error;
-        }
-        return { statusText, status };
-      } else {
-        throw new NotJsonException();
+      if (error) {
+        throw Error("no data added");
       }
-    } catch (e) {
-      return { statusText };
+      return { status, id };
+    } else {
+      throw SyntaxError("received no json data");
     }
-  } catch (NotJsonException) {
-    console.log(NotJsonException.message);
+  } catch (e) {
+    if (e.name == "SyntaxError") {
+      return { status: 401, error_message: e.message };
+    } else {
+      return { status: 400, error_message: e.message };
+    }
   }
-}
-
-function NotJsonException() {
-  this.message = "data is not object";
 }
 
 async function getJsonData(id) {
@@ -44,12 +40,11 @@ async function getJsonData(id) {
       .limit(1)
       .single();
     if (error) {
-      throw error;
+      throw Error("object with this id was not found");
     }
-    return data.data;
-  } catch (error) {
-    console.log(error.message);
-    return { error: "not object" };
+    return { status: 200, data: data.data };
+  } catch (e) {
+    return { status: 404, error_message: e.message };
   }
 }
 module.exports.addJsonData = addJsonData;
