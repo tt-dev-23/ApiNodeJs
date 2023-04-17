@@ -3,7 +3,7 @@ const { getJsonData, addJsonData } = require("./supabase.js");
 
 const app = express();
 
-app.get("/", function (request, response) {
+app.get("/generate", function (request, response) {
   response.sendFile(__dirname + "/index.html");
 });
 
@@ -22,7 +22,7 @@ app.get("/get/:id", function (request, response) {
 // создаем парсер для данных application/x-www-form-urlencoded
 const urlencodedParser = express.urlencoded({ extended: true, limit: "1mb" });
 
-app.post("/", urlencodedParser, function (request, response) {
+app.post("/generate", urlencodedParser, function (request, response) {
   if (!request.body) {
     return response.sendStatus(400);
   }
