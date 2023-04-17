@@ -3,8 +3,18 @@ const { getJsonData, addJsonData } = require("./supabase.js");
 
 const app = express();
 
-app.get("/generate", function (request, response) {
+app.get("/", function (request, response) {
   response.sendFile(__dirname + "/index.html");
+});
+
+app.get("/get", function (request, response) {
+  response.send(
+    "Укажите уникальный id в get запросе. \nНапример, localhost:3000/get/1S2axx"
+  );
+});
+
+app.get("/generate", function (request, response) {
+  response.sendFile(__dirname + "/post.html");
 });
 
 app.get("/get/:id", function (request, response) {
