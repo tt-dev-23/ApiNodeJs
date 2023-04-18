@@ -21,7 +21,7 @@ app.get("/get/:id", function (request, response) {
   const id = request.params.id;
 
   if (id.length > 6) {
-    response.json({ error: "error" });
+    response.json({ status: 400, error_message: "incorrect id" });
   } else {
     getJsonData(id).then(function (data) {
       response.json(data);
@@ -36,13 +36,14 @@ app.post("/generate", urlencodedParser, function (request, response) {
   if (!request.body) {
     return response.sendStatus(400);
   }
-  try {
-    addJsonData(request.body).then(function (data) {
+
+  addJsonData(request.body)
+    .then(function (data) {
       response.json(data);
+    })
+    .catch((error) => {
+      response.json(error);
     });
-  } catch (error) {
-    response.json(error);
-  }
 });
 
 app.listen(3000, () => console.log("Server run..."));
