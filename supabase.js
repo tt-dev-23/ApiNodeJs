@@ -10,6 +10,10 @@ const supabaseApp = supabase.createClient(supabaseUrl, supabaseKey);
 async function addJsonData(data) {
   try {
     if (typeof data === "object") {
+      if (JSON.stringify(data) === "{}") {
+        throw SyntaxError("json empty");
+      }
+
       const id = getId();
       const { status, error } = await supabaseApp
         .from("jsons_tb")

@@ -27,7 +27,7 @@ app.get("/get/:id", function (request, response) {
 
 app.post("/generate", express.json(), function (request, response) {
   if (!request.body) {
-    return response.status(404).json({ message: "no body" });
+    return response.status(400).json({ message: "no body" });
   }
 
   addJsonData(request.body)
@@ -35,7 +35,7 @@ app.post("/generate", express.json(), function (request, response) {
       response.json(data);
     })
     .catch((error) => {
-      response.json(error);
+      return response.status(400).json({ message: error.message });
     });
 });
 
