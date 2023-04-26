@@ -1,40 +1,33 @@
 const express = require("express");
 const { getJsonData, addJsonData } = require("./supabase.js");
+const cors = require("cors");
 
 const app = express();
-
-app.get("/", function (request, response) {
-  response.sendFile(__dirname + "/index.html");
-});
+app.use(cors());
 
 app.get("/get", function (request, response) {
-  response.send(
-    "Укажите уникальный id в get запросе. \nНапример, localhost:3000/get/1S2axx"
-  );
-});
-
-app.get("/generate", function (request, response) {
-  response.sendFile(__dirname + "/post.html");
+  return response.status(400).json({ message: "empty id" });
 });
 
 app.get("/get/:id", function (request, response) {
   const id = request.params.id;
 
-  if (id.length > 6) {
-    response.json({ status: 400, error_message: "incorrect id" });
+  if (id.length > 6 || id.length == 0) {
+    return response.status(400).json({ message: "long id" });
   } else {
-    getJsonData(id).then(function (data) {
-      response.json(data);
-    });
+    getJsonData(id)
+      .then(function (data) {
+        response.json(data);
+      })
+      .catch((error) => {
+        return response.status(404).json({ message: error.message });
+      });
   }
 });
 
-// создаем парсер для данных application/x-www-form-urlencoded
-const urlencodedParser = express.urlencoded({ extended: true, limit: "1mb" });
-
-app.post("/generate", urlencodedParser, function (request, response) {
+app.post("/generate", express.json(), function (request, response) {
   if (!request.body) {
-    return response.sendStatus(400);
+    return response.status(404).json({ message: "no body" });
   }
 
   addJsonData(request.body)

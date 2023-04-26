@@ -23,11 +23,7 @@ async function addJsonData(data) {
       throw SyntaxError("received no json data");
     }
   } catch (e) {
-    if (e.name == "SyntaxError") {
-      return { status: 401, error_message: e.message };
-    } else {
-      return { status: 400, error_message: e.message };
-    }
+    throw e;
   }
 }
 
@@ -40,11 +36,11 @@ async function getJsonData(id) {
       .limit(1)
       .single();
     if (error) {
-      throw Error("object with this id was not found");
+      throw Error("not object");
     }
-    return { status: 200, data: data.data };
+    return data.data;
   } catch (e) {
-    return { status: 404, error_message: e.message };
+    throw e;
   }
 }
 module.exports.addJsonData = addJsonData;
