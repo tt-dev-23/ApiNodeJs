@@ -5,6 +5,10 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 
+app.get("/", function (request, response) {
+  response.sendFile(__dirname + "/index.html");
+});
+
 app.get("/get", function (request, response) {
   return response.status(400).json({ message: "empty id" });
 });
