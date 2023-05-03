@@ -4,6 +4,7 @@ const cors = require("cors");
 
 const app = express();
 app.use(cors());
+app.use(express.static("assets"));
 
 app.get("/", function (request, response) {
   response.sendFile(__dirname + "/index.html");
