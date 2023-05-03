@@ -32,7 +32,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const idData = document.querySelector("#id");
 
     getJsonDataApp(idData.value).then((res) => {
-      if (res.status == 200) {
+      if (res.status === 200) {
         labelGet.innerText = "json:";
         jsText.innerText = JSON.stringify(res.data);
         getError.innerText = "";
@@ -49,9 +49,9 @@ window.addEventListener("DOMContentLoaded", () => {
     const labelPost = document.querySelector(".labelPost");
     const postError = document.querySelector(".postError");
 
-    if (jsonData.value.trim() != "") {
+    if (jsonData.value.trim() !== "") {
       addJsonDataApp(JSON.parse(jsonData.value)).then((res) => {
-        if (res.status == 201) {
+        if (res.status === 201) {
           labelPost.innerText = "id:";
           idText.innerText = res.id;
           postError.innerText = "";
