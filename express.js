@@ -16,8 +16,8 @@ app.get("/get", function (request, response) {
 app.get("/get/:id", function (request, response) {
   const id = request.params.id;
 
-  if (id.length > 6 || id.length == 0) {
-    return response.status(400).json({ message: "long id" });
+  if (id.length !== 6) {
+    return response.status(400).json({ message: "incorrect id" });
   } else {
     getJsonData(id)
       .then(function (data) {
