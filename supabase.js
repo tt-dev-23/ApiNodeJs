@@ -11,7 +11,7 @@ async function addJsonData(data) {
   try {
     if (typeof data === "object") {
       if (JSON.stringify(data) === "{}") {
-        throw SyntaxError("json empty");
+        throw SyntaxError("not json");
       }
 
       const id = getId();
