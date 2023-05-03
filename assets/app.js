@@ -1,9 +1,7 @@
 // GET-запрос
-const url = "https://apinodejs-arfl.onrender.com/";
-
 const getJsonDataApp = async (userId) => {
   try {
-    const response = await axios.get(`${url}get/${userId}`);
+    const response = await axios.get(`/get/${userId}`);
     return response;
   } catch (error) {
     return error.response;
@@ -13,7 +11,7 @@ const getJsonDataApp = async (userId) => {
 // POST-запрос
 const addJsonDataApp = async (dataJson) => {
   try {
-    const response = await axios.post(`${url}generate`, dataJson);
+    const response = await axios.post(`/generate`, dataJson);
     return response.data;
   } catch (error) {
     return error.response.data;
