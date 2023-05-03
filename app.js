@@ -50,17 +50,23 @@ window.addEventListener("DOMContentLoaded", () => {
     const postError = document.querySelector(".postError");
 
     if (jsonData.value.trim() !== "") {
-      addJsonDataApp(JSON.parse(jsonData.value)).then((res) => {
-        if (res.status === 201) {
-          labelPost.innerText = "id:";
-          idText.innerText = res.id;
-          postError.innerText = "";
-        } else {
-          labelPost.innerText = "error:";
-          idText.innerText = "";
-          postError.innerText = res.message;
-        }
-      });
+      try {
+        addJsonDataApp(JSON.parse(jsonData.value)).then((res) => {
+          if (res.status === 201) {
+            labelPost.innerText = "id:";
+            idText.innerText = res.id;
+            postError.innerText = "";
+          } else {
+            labelPost.innerText = "error:";
+            idText.innerText = "";
+            postError.innerText = res.message;
+          }
+        });
+      } catch (error) {
+        labelPost.innerText = "error:";
+        idText.innerText = "";
+        postError.innerText = "data is not json";
+      }
     } else {
       labelPost.innerText = "error:";
       idText.innerText = "";
