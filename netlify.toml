@@ -1,0 +1,13 @@
+[build]
+	command = ""
+	functions = "netlify/functions"
+	publish = "public/"
+
+[functions]
+   node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/get/:id"
+  to = "/.netlify/functions/get?id=:id"
+  status = 200
+  force = true
