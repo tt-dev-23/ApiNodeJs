@@ -11,3 +11,10 @@
   to = "/.netlify/functions/get?id=:id"
   status = 200
   force = true
+
+
+  [[redirects]]
+  from = "/generate"
+  to = "/.netlify/functions/post"
+  status = 200
+  force = true
