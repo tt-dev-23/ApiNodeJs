@@ -11,9 +11,7 @@ export const handler = async (event) => {
     };
   } else {
     try {
-      const data = await addJsonData(body);
-      console.log("post", data);
-
+      const data = await addJsonData(JSON.parse(body));
       return {
         statusCode: 200,
         body: JSON.stringify(data),
