@@ -12,7 +12,7 @@ export const handler = async (event) => {
   } else {
     try {
       const data = await getJsonData(id);
-      console.log(data);
+      console.log("get", data);
 
       return {
         statusCode: 200,
