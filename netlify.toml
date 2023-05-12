@@ -3,12 +3,15 @@
   publish = "public/"
 
 [functions]
-  directory = "functions/"
+  directory = "functions"
   node_bundler = "esbuild"
 
 [[redirects]]
+  #from = "/get/:id"
+  #to = "/.netlify/functions/get/:id"
   from = "/get/*"
   to = "/.netlify/functions/get?id=:splat"
+  query = ":id"
   status = 200
   force = true
 
