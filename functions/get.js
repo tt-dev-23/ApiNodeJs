@@ -1,4 +1,4 @@
-const { getJsonData } = require("../../supabase.js");
+const { getJsonData } = require("../supabase.js");
 
 export const handler = async (event) => {
   const id = event.queryStringParameters.id;

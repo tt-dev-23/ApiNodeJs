@@ -1,4 +1,4 @@
-const { addJsonData } = require("../../supabase.js");
+const { addJsonData } = require("../supabase.js");
 
 export const handler = async (event) => {
   const body = event.body;
