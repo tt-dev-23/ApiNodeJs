@@ -1,6 +1,13 @@
 const { getJsonData } = require("../supabase.js");
 
 export const handler = async (event, context) => {
+  if (event === undefined)
+    return {
+      statusCode: 405,
+      body: JSON.stringify({
+        message: "event undefined",
+      }),
+    };
   // const pathSplit = event.path.split("/");
   // console.log("pathSplit", pathSplit);
   console.log("query", event);
