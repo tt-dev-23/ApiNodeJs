@@ -7,35 +7,13 @@
   node_bundler = "esbuild"
 
 [[redirects]]
-  from = "/get1/:id"
-  to = "/.netlify/functions/get?id=:id"
+  from = "/"
+  to = "/index.html"
   status = 200
   force = true
 
 [[redirects]]
-from = "/get2/:id"
-  to = "/.netlify/functions/get"
-  status = 301
-  force = false
-  query = {id = ":id"}
-
-
-[[redirects]]
-  from = "/get3/*"
-  to = "/.netlify/functions/get"
-  status = 200
-  force = true
-  query = {id = ":splat"}
-
-
-[[redirects]]
-  from = "/get4/*"
-  to = "/.netlify/functions/get?id=:splat"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/get5/*"
+  from = "/get/*"
   to = "/.netlify/functions/get"
   status = 200
   force = true
