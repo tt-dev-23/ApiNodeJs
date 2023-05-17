@@ -5,8 +5,6 @@ export const handler = async (event) => {
   const id = pathSplit[2];
   const regexp = /[^A-Za-z0-9]/;
 
-  console.log(pathSplit.length);
-
   if (pathSplit.length < 3) {
     return {
       statusCode: 400,
