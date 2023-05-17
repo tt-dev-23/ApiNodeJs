@@ -3,12 +3,20 @@ const { getJsonData } = require("../supabase.js");
 export const handler = async (event) => {
   const pathSplit = event.path.split("/");
   const id = pathSplit[2];
+  const regexp = /[^A-Za-z0-9]/;
 
-  if (id.length !== 6) {
+  if (id.match(regexp) !== null) {
     return {
       statusCode: 400,
       body: JSON.stringify({
-        message: "incorrect id",
+        message: "incorrect symbol id",
+      }),
+    };
+  } else if (id.length !== 6) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({
+        message: "incorrect length id",
       }),
     };
   } else {
