@@ -5,6 +5,17 @@ export const handler = async (event) => {
   const id = pathSplit[2];
   const regexp = /[^A-Za-z0-9]/;
 
+  console.log(pathSplit.length);
+
+  if (pathSplit.length < 3) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({
+        message: "incorrect format id",
+      }),
+    };
+  }
+
   if (id.match(regexp) !== null) {
     return {
       statusCode: 400,
@@ -12,28 +23,36 @@ export const handler = async (event) => {
         message: "incorrect symbol id",
       }),
     };
-  } else if (id.length !== 6) {
+  }
+  if (id.length === 0) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({
+        message: "id empty",
+      }),
+    };
+  }
+  if (id.length !== 6) {
     return {
       statusCode: 400,
       body: JSON.stringify({
         message: "incorrect length id",
       }),
     };
-  } else {
-    try {
-      const data = await getJsonData(id);
+  }
+  try {
+    const data = await getJsonData(id);
 
-      return {
-        statusCode: 200,
-        body: JSON.stringify(data),
-      };
-    } catch (error) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({
-          message: error.message,
-        }),
-      };
-    }
+    return {
+      statusCode: 200,
+      body: JSON.stringify(data),
+    };
+  } catch (error) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({
+        message: error.message,
+      }),
+    };
   }
 };
