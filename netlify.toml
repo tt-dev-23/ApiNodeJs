@@ -21,10 +21,11 @@ from = "/get2/:id"
 
 
 [[redirects]]
-  from = "/get3/:id"
-  to = "/.netlify/functions/get?id=:id"
+  from = "/get3/*"
+  to = "/.netlify/functions/get"
   status = 200
   force = true
+  query = {id = ":splat"}
 
 
 [[redirects]]
