@@ -1,8 +1,7 @@
 // GET-запрос
 const getJsonDataApp = async (userId) => {
   try {
-    const response = await axios.get(`/get/${userId}`);
-    return response;
+    return await axios.get(`/get/${userId}`);
   } catch (error) {
     return error.response;
   }
@@ -19,55 +18,53 @@ const addJsonDataApp = async (dataJson) => {
 };
 
 window.addEventListener("DOMContentLoaded", () => {
-  const getQuery = document.querySelector(".get");
-  const postQuery = document.querySelector(".post");
-
-  getQuery.addEventListener("click", () => {
-    const jsText = document.querySelector(".jsText");
+  document.querySelector(".get").addEventListener("click", async () => {
+    const jsText   = document.querySelector(".jsText");
     const labelGet = document.querySelector(".labelGet");
     const getError = document.querySelector(".getError");
-    const idData = document.querySelector("#id");
+    const idData   = document.querySelector("#id");
 
-    getJsonDataApp(idData.value).then((res) => {
-      if (res.status === 200) {
-        labelGet.innerText = "json:";
-        jsText.innerText = JSON.stringify(res.data);
-        getError.innerText = "";
-      } else {
-        labelGet.innerText = "error:";
-        jsText.innerText = "";
-        getError.innerText = res.data.message;
-      }
-    });
+    const responseData = await getJsonDataApp(idData.value);
+    console.log(responseData.data);
+    labelGet.innerText = responseData.status === 200 ? "JSON:" : "Error:";
+    jsText.innerText   = responseData.status === 200 ? (JSON.stringify(responseData.data) || "No data available") : "";
+    getError.innerText = responseData.status === 200 ? "" : (responseData.data && responseData.data.message) || "Unknown error occurred";
   });
-  postQuery.addEventListener("click", () => {
-    const jsonData = document.querySelector(".json_data");
-    const idText = document.querySelector(".IdText");
+
+  document.querySelector(".post").addEventListener("click", async () => {
+    const jsonData  = document.querySelector(".json_data");
+    const idText    = document.querySelector(".IdText");
     const labelPost = document.querySelector(".labelPost");
     const postError = document.querySelector(".postError");
 
-    if (jsonData.value.trim() !== "") {
+    const showSuccessMessage = (responseData) => {
+      labelPost.innerText = "Ваш ID: ";
+      idText.innerText    = responseData.id;
+      postError.innerText = "";
+    }
+
+    const showErrorMessage = (errorMessage) => {
+      labelPost.innerText = "Error: ";
+      idText.innerText    = "";
+      postError.innerText = errorMessage;
+    }
+
+    const trimmedValue = jsonData.value.trim();
+
+    if (trimmedValue !== "") {
       try {
-        addJsonDataApp(JSON.parse(jsonData.value)).then((res) => {
-          if (res.status === 201) {
-            labelPost.innerText = "id:";
-            idText.innerText = res.id;
-            postError.innerText = "";
-          } else {
-            labelPost.innerText = "error:";
-            idText.innerText = "";
-            postError.innerText = res.message;
-          }
-        });
+        const responseData = await addJsonDataApp(JSON.parse(trimmedValue));
+
+        if (responseData.status === 201) {
+          showSuccessMessage(responseData);
+        } else {
+          showErrorMessage(responseData.message);
+        }
       } catch (error) {
-        labelPost.innerText = "error:";
-        idText.innerText = "";
-        postError.innerText = "data is not json";
+        showErrorMessage('Data is not json');
       }
     } else {
-      labelPost.innerText = "error:";
-      idText.innerText = "";
-      postError.innerText = "not data";
+      showErrorMessage('No data provided');
     }
   });
 });
