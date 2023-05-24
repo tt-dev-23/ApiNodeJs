@@ -4,6 +4,7 @@ const { getId } = require("./generatorId");
 
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_KEY;
+const databaseTable = process.env.DATABASE_TABLE;
 
 const supabaseApp = supabase.createClient(supabaseUrl, supabaseKey);
 
@@ -16,11 +17,11 @@ async function addJsonData(data) {
 
       const id = getId();
       const { status, error } = await supabaseApp
-        .from("jsons_tb")
+        .from(databaseTable)
         .insert([{ id, data }]);
 
       if (error) {
-        throw Error("no data added");
+        throw Error(error.message);
       }
       return { status, id };
     } else {
@@ -34,13 +35,13 @@ async function addJsonData(data) {
 async function getJsonData(id) {
   try {
     const { data, error } = await supabaseApp
-      .from("jsons_tb")
+      .from(databaseTable)
       .select("data")
       .eq("id", id)
       .limit(1)
       .single();
     if (error) {
-      throw Error("not object");
+      throw Error(error.message);
     }
     return data.data;
   } catch (e) {
