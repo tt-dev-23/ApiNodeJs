@@ -4,7 +4,7 @@ const { getId } = require("./generatorId");
 
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_KEY;
-const databaseTable = process.env.DATABASE_TABLE;
+const databaseTable = process.env.DATABASE_TABLE || 'jsons_tb';
 
 const supabaseApp = supabase.createClient(supabaseUrl, supabaseKey);
 

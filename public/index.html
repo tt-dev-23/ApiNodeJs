@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 
 <head>
   <title>Api Node JS</title>
@@ -17,41 +17,41 @@
 </head>
 
 <body>
-<div class="container">
-  <h1 class="title-page">Сервис для генерации коротких ссылок</h1>
+  <div class="container">
+    <h1 class="title-page">Сервис для генерации коротких ссылок</h1>
 
-  <blockquote>
-    <h2 class="blockquote-title">Для генерация короткой ссылки к json данным</h2>
-    <p class="blockquote-text"><b>Вам нужно передать данные в формате json на сервер </b></p>
-    <p class="blockquote-text">Например: <b>{"name":"Denis", "profession":"developer"}</b> в ответ возвращается уникальная ключ: <b>{id}</b>.</p>
-  </blockquote>
+    <blockquote>
+      <h2 class="blockquote-title">Для генерация короткой ссылки к json данным</h2>
+      <p class="blockquote-text"><b>Вам нужно передать данные в формате json на сервер </b></p>
+      <p class="blockquote-text">Например: <b>{"name":"Denis", "profession":"developer"}</b> в ответ возвращается уникальная ключ: <b>{id}</b>.</p>
+    </blockquote>
 
-  <label class="custom_label" for="json_data">Введите данные</label>
-  <textarea id="json_data" class="form-control json_data" rows="5"
-            placeholder='{"name":"Denis", "profession":"developer"}'></textarea>
+    <label class="custom_label" for="json_data">Введите данные</label>
+    <textarea id="json_data" class="form-control json_data" rows="5"
+              placeholder='{"name":"Denis", "profession":"developer"}'></textarea>
 
-  <div class="command">
-    <div class="answer labelPost"></div>
-    <div class="answer IdText resultText"></div>
-    <div class="answer error postError"></div>
-    <button type="button" class="btn btn-success button post">Сгенерировать</button>
+    <div class="command">
+      <div class="answer labelPost"></div>
+      <div class="answer IdText resultText"></div>
+      <div class="answer error postError"></div>
+      <button type="button" class="btn btn-success button post">Сгенерировать</button>
+    </div>
+
+    <blockquote class="callout quote EN">
+      <h2 class="blockquote-title">Получить JSON данные по ID</h2>
+      <p class="blockquote-text">Проверяем, есть ли в базе с таким <i>{ID}</i> данные, если есть то возвращается JSON.</p>
+    </blockquote>
+
+    <label class="custom_label" for="id">Введите <b>{id}</b> .</label><br>
+    <input class="form-control" type="text" placeholder="Введите id" id="id"><br>
+
+    <div class="command">
+      <div class="answer labelGet"></div>
+      <div class="answer jsText resultText"></div>
+      <div class="answer error getError"></div>
+      <button type="button" class="btn btn-success get button">Получить json данные по ID</button>
+    </div>
   </div>
-
-  <blockquote class="callout quote EN">
-    <h2 class="blockquote-title">Получить JSON данные по id</h2>
-    <p class="blockquote-text">Проверяем, есть ли в базе с таким <i>{id}</i> данные, если есть то возвращается JSON.</p>
-  </blockquote>
-
-  <label class="custom_label" for="id">Введите <b>{id}</b> .</label><br>
-  <input class="form-control" type="text" placeholder="Введите id" id="id"><br>
-
-  <div class="command">
-    <div class="answer labelGet"></div>
-    <div class="answer jsText resultText"></div>
-    <div class="answer error getError"></div>
-    <button type="button" class="btn btn-success get button">Получить json данные по ID</button>
-  </div>
-</div>
 </body>
 
 </html>

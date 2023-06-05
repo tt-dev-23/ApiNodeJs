@@ -19,33 +19,32 @@ const addJsonDataApp = async (dataJson) => {
 
 window.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".get").addEventListener("click", async () => {
-    const jsText   = document.querySelector(".jsText");
+    const jsText = document.querySelector(".jsText");
     const labelGet = document.querySelector(".labelGet");
     const getError = document.querySelector(".getError");
-    const idData   = document.querySelector("#id");
+    const idData = document.querySelector("#id");
 
     const responseData = await getJsonDataApp(idData.value);
-    console.log(responseData.data);
     labelGet.innerText = responseData.status === 200 ? "JSON:" : "Error:";
-    jsText.innerText   = responseData.status === 200 ? (JSON.stringify(responseData.data) || "No data available") : "";
+    jsText.innerText = responseData.status === 200 ? (JSON.stringify(responseData.data) || "No data available") : "";
     getError.innerText = responseData.status === 200 ? "" : (responseData.data && responseData.data.message) || "Unknown error occurred";
   });
 
   document.querySelector(".post").addEventListener("click", async () => {
-    const jsonData  = document.querySelector(".json_data");
-    const idText    = document.querySelector(".IdText");
+    const jsonData = document.querySelector(".json_data");
+    const idText = document.querySelector(".IdText");
     const labelPost = document.querySelector(".labelPost");
     const postError = document.querySelector(".postError");
 
     const showSuccessMessage = (responseData) => {
       labelPost.innerText = "Ваш ID: ";
-      idText.innerText    = responseData.id;
+      idText.innerText = responseData.id;
       postError.innerText = "";
     }
 
     const showErrorMessage = (errorMessage) => {
       labelPost.innerText = "Error: ";
-      idText.innerText    = "";
+      idText.innerText = "";
       postError.innerText = errorMessage;
     }
 
